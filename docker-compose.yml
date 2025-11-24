@@ -1,0 +1,12 @@
+services:
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000" # MinIO console
+      - "9001:9001" # S3 API endpoint
+    volumes:
+      - ./minio_data:/data # Persist data to a local directory
+    environment:
+      MINIO_ROOT_USER: miniadmin # Default root user (change in production)
+      MINIO_ROOT_PASSWORD: miniadmin # Default root password (change in production)
+    command: server /data --console-address ":9001"

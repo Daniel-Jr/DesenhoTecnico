@@ -1,0 +1,43 @@
+<div id="<%= dom_id image %>">
+  <div>
+    <strong>Image:</strong>
+    <%= image_tag image.image.variant(:thumb) %>
+  </div>
+
+  <div>
+    <strong>Image Big:</strong>
+    <%= image_tag image.image.variant(:big) %>
+  </div>
+
+  <div>
+    <strong>Image Medium:</strong>
+    <%= image_tag image.image.variant(:medium) %>
+  </div>
+
+  <div>
+    <strong>Image Small:</strong>
+    <%= image_tag image.image.variant(:small) %>
+  </div>
+
+  <div>
+    <strong>Image Webp:</strong>
+    <%= image_tag image.image.variant(:webp) %>
+    <p> Size from <%= number_to_human_size image.image.byte_size %> to <%=  number_to_human_size image.image.variant(:webp).image.blob.byte_size %> </p>
+  </div>
+
+  <div>
+    <strong>Image Flipped Vertical:</strong>
+    <%= image_tag image.image.variant(:flipped_vertical) %>
+  </div>
+
+  <div>
+    <strong>Grayscale:</strong>
+    <%= image_tag image.image.variant(:grayscale) %>
+  </div>
+
+  <div>
+    <strong>Metadata:</strong>
+    <%= image.metadata %>
+  </div>
+
+</div>
