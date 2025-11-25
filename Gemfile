@@ -73,4 +73,6 @@ gem "aws-sdk-s3", "~> 1.205"
 
 gem "descriptive_statistics", "~> 2.5"
 
-gem "rmagick", "~> 6.1"
+gem "openssl", "~> 3.3.1"
+
+gem "chartkick", "~> 5.2"

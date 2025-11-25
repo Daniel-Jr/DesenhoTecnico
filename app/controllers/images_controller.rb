@@ -21,11 +21,14 @@ class ImagesController < ApplicationController
 
   # POST /images or /images.json
   def create
-    @image = Image.new(image_params)
+    @historygram = Historygram.new(params[:image][:image].tempfile)
+    @historygram.process_historygram
+
+    @image = Image.new(image_params.merge!({ historygram: @historygram.results }))
 
     respond_to do |format|
       if @image.save
-        format.html { redirect_to @image, notice: "Image was successfully created." }
+        format.html { redirect_to images_path, notice: "Image was successfully created." }
         format.json { render :show, status: :created, location: @image }
       else
         format.html { render :new, status: :unprocessable_entity }

@@ -1,0 +1,9 @@
+<div id="<%= dom_id image %>">
+    <article>
+        <h4> <%= link_to "# #{dom_id(image)}", image %> </h2>
+        <%= image_tag image.image.variant(:thumb) %>
+    
+        <h4> Histograma </h4>
+        <%= line_chart(image.historygram["histograms"]) %>
+    </article>
+</div>

@@ -1,43 +1,95 @@
 <div id="<%= dom_id image %>">
-  <div>
-    <strong>Image:</strong>
-    <%= image_tag image.image.variant(:thumb) %>
-  </div>
+  <article>
 
-  <div>
-    <strong>Image Big:</strong>
-    <%= image_tag image.image.variant(:big) %>
-  </div>
+    <div>
+      <h2>1. Imagem Padrão</h2>
+      <figure>
+        <%= image_tag image.image %>
+      </figure>
+      <p> Dimensões <%= image.image.metadata['width'] %>X<%= image.image.metadata['height']%> </p>
+    </div>
 
-  <div>
-    <strong>Image Medium:</strong>
-    <%= image_tag image.image.variant(:medium) %>
-  </div>
+  </article>
 
-  <div>
-    <strong>Image Small:</strong>
-    <%= image_tag image.image.variant(:small) %>
-  </div>
+  <article>
+    <h2>2. Redução da Imagem</h2>
+    <div>
+      <strong>Imagem 75%:</strong>
+      <%= image_tag image.image.variant(:big) %>
+    </div>
 
-  <div>
-    <strong>Image Webp:</strong>
+    <div>
+      <strong>Imagem 50%:</strong>
+      <%= image_tag image.image.variant(:medium) %>
+    </div>
+
+    <div>
+      <strong>Imagem 25%%:</strong>
+      <%= image_tag image.image.variant(:small) %>
+    </div>
+  </article>
+
+  <article>
+    <h2>3. Conversão de Formato</h2>
     <%= image_tag image.image.variant(:webp) %>
     <p> Size from <%= number_to_human_size image.image.byte_size %> to <%=  number_to_human_size image.image.variant(:webp).image.blob.byte_size %> </p>
-  </div>
+  </article>
 
-  <div>
-    <strong>Image Flipped Vertical:</strong>
-    <%= image_tag image.image.variant(:flipped_vertical) %>
-  </div>
+  <article>
+    <div>
+      <h2>4. Operação Geométrica</h2>
+      <%= image_tag image.image.variant(:flipped_vertical) %>
+    </div>
+  </article>
 
-  <div>
-    <strong>Grayscale:</strong>
-    <%= image_tag image.image.variant(:grayscale) %>
-  </div>
+  <article>
+    <div>
+      <h2>5. Operação de Cores</h2>
+      <%= image_tag image.image.variant(:grayscale) %>
+    </div>
+  </article>
 
-  <div>
-    <strong>Metadata:</strong>
-    <%= image.metadata %>
-  </div>
+  <article>
+    <h2>6. Histograma</h2>
 
+    <h4> <%= image.historygram["red_stats"]["name"]%> </h4>
+    <ul>
+      <li>Valor mínimo <%= image.historygram["red_stats"]["min"] %></li>
+      <li>Valor máximo <%= image.historygram["red_stats"]["max"] %></li>
+      <li>Valor média <%= image.historygram["red_stats"]["mean"] %></li>
+      <li>Valor mediana <%= image.historygram["red_stats"]["median"] %></li>
+      <li>Valor desvio-padrão <%= image.historygram["red_stats"]["std"] %></li>
+    </ul>
+
+    <h4> <%= image.historygram["green_stats"]["name"]%> </h4>
+    <ul>
+      <li>Valor mínimo <%= image.historygram["green_stats"]["min"] %></li>
+      <li>Valor máximo <%= image.historygram["green_stats"]["max"] %></li>
+      <li>Valor média <%= image.historygram["green_stats"]["mean"] %></li>
+      <li>Valor mediana <%= image.historygram["green_stats"]["median"] %></li>
+      <li>Valor desvio-padrão <%= image.historygram["green_stats"]["std"] %></li>
+    </ul>
+
+    <h4> <%= image.historygram["blue_stats"]["name"]%> </h4>
+    <ul>
+      <li>Valor mínimo <%= image.historygram["blue_stats"]["min"] %></li>
+      <li>Valor máximo <%= image.historygram["blue_stats"]["max"] %></li>
+      <li>Valor média <%= image.historygram["blue_stats"]["mean"] %></li>
+      <li>Valor mediana <%= image.historygram["blue_stats"]["median"] %></li>
+      <li>Valor desvio-padrão <%= image.historygram["blue_stats"]["std"] %></li>
+    </ul>
+
+    <h4> Histograma </h4>
+
+    <%= line_chart(image.historygram["histograms"]) %>
+  </article>
+
+  <article>
+    <h2>7. Análise de Bits e Estrutura da Imagem</h2>
+
+    <p> Profundidade de cor: <%= image.historygram["bcp"] %> </p>
+    <p> Número de canais: <%= image.historygram["channel_size"] %> </p>
+    <p> Dimensões: <%= image.image.metadata['width'] %>X<%= image.image.metadata['height']%> </p>
+    <p> Tamanho:  <%= number_to_human_size image.image.byte_size %> </p>
+  </article>
 </div>

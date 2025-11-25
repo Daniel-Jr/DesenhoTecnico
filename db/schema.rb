@@ -41,7 +41,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_24_173549) do
 
   create_table "images", force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.json "metadata"
+    t.json "historygram"
     t.datetime "updated_at", null: false
   end
 
